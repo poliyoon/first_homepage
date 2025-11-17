@@ -19,7 +19,8 @@ const DescriptionGenerator: React.FC = () => {
       const description = await generateDescription(productName, keywords);
       setGeneratedDescription(description);
     } catch (err) {
-      setError('설명 생성에 실패했습니다. API 키를 확인하고 다시 시도해 주세요.');
+      const message = err instanceof Error ? err.message : '설명 생성에 실패했습니다. API 키를 확인하고 다시 시도해 주세요.';
+      setError(message);
       console.error(err);
     } finally {
       setIsLoading(false);

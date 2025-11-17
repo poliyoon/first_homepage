@@ -1,7 +1,26 @@
 import { GoogleGenAI } from "@google/genai";
 
-// API 키는 실행 환경에서 자동으로 제공됩니다.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+let cachedClient: GoogleGenAI | null = null;
+
+const getApiKey = (): string => {
+  const apiKey = import.meta?.env?.VITE_GEMINI_API_KEY;
+
+  if (!apiKey) {
+    throw new Error(
+      "Gemini API 키가 설정되지 않았습니다. Vercel 혹은 .env 파일에 VITE_GEMINI_API_KEY 값을 추가해 주세요."
+    );
+  }
+
+  return apiKey;
+};
+
+const getClient = (): GoogleGenAI => {
+  if (!cachedClient) {
+    cachedClient = new GoogleGenAI({ apiKey: getApiKey() });
+  }
+
+  return cachedClient;
+};
 
 export const generateDescription = async (productName: string, keywords: string): Promise<string> => {
   try {
@@ -12,7 +31,7 @@ export const generateDescription = async (productName: string, keywords: string)
     // `systemInstruction` 파라미터가 문제를 일으킬 경우를 대비하여, 지침과 프롬프트를 하나로 결합합니다.
     const combinedPrompt = `${systemInstruction}\n\n---\n\n${userPrompt}`;
 
-    const response = await ai.models.generateContent({
+    const response = await getClient().models.generateContent({
         model: 'gemini-2.5-flash',
         contents: combinedPrompt,
         config: {
