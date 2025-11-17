@@ -11,5 +11,4 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <div>Hello, World! 테스트</div>  </React.StrictMode>
-);
+    <App />);
