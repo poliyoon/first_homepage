@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import ProductGrid from './components/ProductGrid';
-import DescriptionGenerator from './components/DescriptionGenerator';
-import Footer from './components/Footer';
-import { products } from './constants';
+import Header from '../components/Header';
+import Hero from '../components/Hero';
+import ProductGrid from '../components/ProductGrid';
+import DescriptionGenerator from '../components/DescriptionGenerator';
+import Footer from '../components/Footer';
+import { products } from '../constants';
 
 const App: React.FC = () => {
   return (
