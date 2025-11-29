@@ -2,15 +2,15 @@ import { DashboardBundle, DailySummary, RiskSignal, TrendBundle, TrendPoint } fr
 
 type BackendDailySummary = {
   date: string;
-  calories_consumed: number;
-  calorie_goal: number;
+  caloriesConsumed: number;
+  calorieGoal: number;
   systolic: number;
   diastolic: number;
   weight: number;
-  exercise_minutes: number;
-  hydration_liters: number;
-  medication_adherence: number;
-  missed_doses: number;
+  exerciseMinutes: number;
+  hydrationLiters: number;
+  medicationAdherence: number;
+  missedDoses: number;
   steps: number;
 };
 
@@ -23,8 +23,8 @@ type BackendTrendPoint = {
 };
 
 type BackendTrendBundle = {
-  seven_day: BackendTrendPoint[];
-  thirty_day: BackendTrendPoint[];
+  sevenDay: BackendTrendPoint[];
+  thirtyDay: BackendTrendPoint[];
 };
 
 type BackendDashboardBundle = {
@@ -35,25 +35,25 @@ type BackendDashboardBundle = {
 
 const mapSummary = (summary: BackendDailySummary): DailySummary => ({
   date: summary.date,
-  caloriesConsumed: summary.calories_consumed,
-  calorieGoal: summary.calorie_goal,
+  caloriesConsumed: summary.caloriesConsumed,
+  calorieGoal: summary.calorieGoal,
   protein: 0,
   carbs: 0,
   fats: 0,
   systolic: summary.systolic,
   diastolic: summary.diastolic,
   weight: summary.weight,
-  exerciseMinutes: summary.exercise_minutes,
-  hydrationLiters: summary.hydration_liters,
-  medicationAdherence: summary.medication_adherence,
-  missedDoses: summary.missed_doses,
+  exerciseMinutes: summary.exerciseMinutes,
+  hydrationLiters: summary.hydrationLiters,
+  medicationAdherence: summary.medicationAdherence,
+  missedDoses: summary.missedDoses,
   steps: summary.steps,
   sleepHours: 0,
 });
 
 const mapTrend = (trend: BackendTrendBundle): TrendBundle => ({
-  sevenDay: trend.seven_day,
-  thirtyDay: trend.thirty_day,
+  sevenDay: trend.sevenDay,
+  thirtyDay: trend.thirtyDay,
 });
 
 const buildBundleFromBackend = (payload: BackendDashboardBundle): DashboardBundle => ({
